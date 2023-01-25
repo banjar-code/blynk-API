@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title >Blynk API</title>
+		<style>
+			.data {
+				display: flex;
+				flex-wrap: wrap;
+				align-items: center;
+				justify-content: center;
+			}
+
+			.data-item {
+				width: 100%;
+				margin: 10px;
+				text-align: center;
+				font-size: 1.2em;
+				background-color: #3f5ae1;
+				/* Green background color */
+				color: white;
+				/* White text color */
+				padding: 12px 20px;
+				/* Padding for the button */
+				border: none;
+				/* Remove border */
+				cursor: pointer;
+				/* Add cursor pointer */
+				border-radius: 25px;
+			}
+
+			.data-kol {
+				width: 20%;
+				margin: 10px;
+				text-align: center;
+				font-size: 1.2em;
+			}
+
+			.data-item:hover {
+				background-color: #243ebd;
+			}
+
+			@media only screen and (min-width: 300px) and (max-width: 1024px) {
+
+				/* aturan CSS untuk tablet */
+				.data-kol {
+					width: 40%;
+					margin: 10px;
+					text-align: center;
+					font-size: 4em;
+				}
+			}
+
+			@media only screen and (min-width: 1024px) {
+
+				/* aturan CSS untuk desktop */
+				.data-kol {
+					width: 20%;
+					margin: 10px;
+					text-align: center;
+					font-size: 1.5em;
+				}
+			}
+		</style>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	</head>
+	<body>
+		<center>
+			<h1 id="judul"></h1>
+		</center>
+		<div class="data">
+			<div class="data-kol">
+				<label for="v1">Lampu Aquarium 1</label>
+				<button class="data-item" id="v1">Loading...</button>
+			</div>
+			<div class="data-kol">
+				<label for="v2">Lampu Aquarium 2</label>
+				<button class="data-item" id="v2">Loading...</button>
+			</div>
+			<div class="data-kol">
+				<label for="v3">Relay 3</label>
+				<button class="data-item" id="v3">Loading...</button>
+			</div>
+			<div class="data-kol">
+				<label for="v4">Relay 4</label>
+				<button class="data-item" id="v4">Loading...</button>
+			</div>
+			<div class="data-kol">
+				<label for="v5">Relay 5</label>
+				<button class="data-item" id="v5">Loading...</button>
+			</div>
+			<div class="data-kol">
+				<label for="v6">Relay 6</label>
+				<button class="data-item" id="v6">Loading...</button>
+			</div>
+			<div class="data-kol">
+				<label for="v7">Relay 7</label>
+				<button class="data-item" id="v7">Loading...</button>
+			</div>
+			<div class="data-kol">
+				<label for="v8">Relay 8</label>
+				<button class="data-item" id="v8">Loading...</button>
+			</div>
+			<div class="data-kol">
+				<label for="v9">Semua Tombol</label>
+				<button class="data-item" id="v9">OFF</button>
+			</div>
+		</div>
+		<script>
+			fetch('https://blynk.cloud/external/api/device/meta?token=OWA9HCtgSKxqb_BBHDR6oQMT4Dj74m0O&metaFieldId=1').then(response => response.json()).then(data => {
+				document.getElementById("judul").innerHTML = data.value;
+			})
+			// fungsi untuk mengambil status awal
+			function getStatus() {
+				$.ajax({
+					url: 'https://sgp1.blynk.cloud/external/api/get?token=OWA9HCtgSKxqb_BBHDR6oQMT4Dj74m0O&v1&v2&v3&v4&v5&v6&v7&v8',
+					success: function(response) {
+						if (response.v1 == 1) {
+							$('#v1').text('ON');
+						} else {
+							$('#v1').text('OFF');
+						}
+						if (response.v2 == 1) {
+							$('#v2').text('ON');
+						} else {
+							$('#v2').text('OFF');
+						}
+						if (response.v3 == 1) {
+							$('#v3').text('ON');
+						} else {
+							$('#v3').text('OFF');
+						}
+						if (response.v4 == 1) {
+							$('#v4').text('ON');
+						} else {
+							$('#v4').text('OFF');
+						}
+						if (response.v5 == 1) {
+							$('#v5').text('ON');
+						} else {
+							$('#v5').text('OFF');
+						}
+						if (response.v6 == 1) {
+							$('#v6').text('ON');
+						} else {
+							$('#v6').text('OFF');
+						}
+						if (response.v7 == 1) {
+							$('#v7').text('ON');
+						} else {
+							$('#v7').text('OFF');
+						}
+						if (response.v8 == 1) {
+							$('#v8').text('ON');
+						} else {
+							$('#v8').text('OFF');
+						}
+					}
+				});
+			}
+			getStatus();
+			// event listener untuk tombol
+			$('#v1').click(function() {
+				if ($(this).text() == 'ON') {
+					$.ajax({
+						url: 'https://sgp1.blynk.cloud/external/api/update?token=OWA9HCtgSKxqb_BBHDR6oQMT4Dj74m0O&v1=0',
+						success: function(response) {
+							$('#v1').text('OFF');
+						}
+					});
+				} else {
+					$.ajax({
+						url: 'https://sgp1.blynk.cloud/external/api/update?token=OWA9HCtgSKxqb_BBHDR6oQMT4Dj74m0O&v1=1',
+						success: function(response) {
+							$('#v1').text('ON');
+						}
+					});
+				}
+			});
+			$('#v2').click(function() {
+				if ($(this).text() == 'ON') {
+					$.ajax({
+						url: 'https://sgp1.blynk.cloud/external/api/update?token=OWA9HCtgSKxqb_BBHDR6oQMT4Dj74m0O&v2=0',
+						success: function(response) {
+							$('#v2').text('OFF');
+						}
+					});
+				} else {
+					$.ajax({
+						url: 'https://sgp1.blynk.cloud/external/api/update?token=OWA9HCtgSKxqb_BBHDR6oQMT4Dj74m0O&v2=1',
+						success: function(response) {
+							$('#v2').text('ON');
+						}
+					});
+				}
+			});
+			$('#v3').click(function() {
+				if ($(this).text() == 'ON') {
+					$.ajax({
+						url: 'https://sgp1.blynk.cloud/external/api/update?token=OWA9HCtgSKxqb_BBHDR6oQMT4Dj74m0O&v3=0',
+						success: function(response) {
+							$('#v3').text('OFF');
+						}
+					});
+				} else {
+					$.ajax({
+						url: 'https://sgp1.blynk.cloud/external/api/update?token=OWA9HCtgSKxqb_BBHDR6oQMT4Dj74m0O&v3=1',
+						success: function(response) {
+							$('#v3').text('ON');
+						}
+					});
+				}
+			});
+			$('#v4').click(function() {
+				if ($(this).text() == 'ON') {
+					$.ajax({
+						url: 'https://sgp1.blynk.cloud/external/api/update?token=OWA9HCtgSKxqb_BBHDR6oQMT4Dj74m0O&v4=0',
+						success: function(response) {
+							$('#v4').text('OFF');
+						}
+					});
+				} else {
+					$.ajax({
+						url: 'https://sgp1.blynk.cloud/external/api/update?token=OWA9HCtgSKxqb_BBHDR6oQMT4Dj74m0O&v4=1',
+						success: function(response) {
+							$('#v4').text('ON');
+						}
+					});
+				}
+			});
+			$('#v5').click(function() {
+				if ($(this).text() == 'ON') {
+					$.ajax({
+						url: 'https://sgp1.blynk.cloud/external/api/update?token=OWA9HCtgSKxqb_BBHDR6oQMT4Dj74m0O&v5=0',
+						success: function(response) {
+							$('#v5').text('OFF');
+						}
+					});
+				} else {
+					$.ajax({
+						url: 'https://sgp1.blynk.cloud/external/api/update?token=OWA9HCtgSKxqb_BBHDR6oQMT4Dj74m0O&v5=1',
+						success: function(response) {
+							$('#v5').text('ON');
+						}
+					});
+				}
+			});
+			$('#v6').click(function() {
+				if ($(this).text() == 'ON') {
+					$.ajax({
+						url: 'https://sgp1.blynk.cloud/external/api/update?token=OWA9HCtgSKxqb_BBHDR6oQMT4Dj74m0O&v6=0',
+						success: function(response) {
+							$('#v6').text('OFF');
+						}
+					});
+				} else {
+					$.ajax({
+						url: 'https://sgp1.blynk.cloud/external/api/update?token=OWA9HCtgSKxqb_BBHDR6oQMT4Dj74m0O&v6=1',
+						success: function(response) {
+							$('#v6').text('ON');
+						}
+					});
+				}
+			});
+			$('#v7').click(function() {
+				if ($(this).text() == 'ON') {
+					$.ajax({
+						url: 'https://sgp1.blynk.cloud/external/api/update?token=OWA9HCtgSKxqb_BBHDR6oQMT4Dj74m0O&v7=0',
+						success: function(response) {
+							$('#v7').text('OFF');
+						}
+					});
+				} else {
+					$.ajax({
+						url: 'https://sgp1.blynk.cloud/external/api/update?token=OWA9HCtgSKxqb_BBHDR6oQMT4Dj74m0O&v7=1',
+						success: function(response) {
+							$('#v7').text('ON');
+						}
+					});
+				}
+			});
+			$('#v8').click(function() {
+				if ($(this).text() == 'ON') {
+					$.ajax({
+						url: 'https://sgp1.blynk.cloud/external/api/update?token=OWA9HCtgSKxqb_BBHDR6oQMT4Dj74m0O&v8=0',
+						success: function(response) {
+							$('#v8').text('OFF');
+						}
+					});
+				} else {
+					$.ajax({
+						url: 'https://sgp1.blynk.cloud/external/api/update?token=OWA9HCtgSKxqb_BBHDR6oQMT4Dj74m0O&v8=1',
+						success: function(response) {
+							$('#v8').text('ON');
+						}
+					});
+				}
+			});
+			$('#v9').click(function() {
+				if ($(this).text() == 'ON') {
+					$.ajax({
+						url: 'https://sgp1.blynk.cloud/external/api/batch/update?token=OWA9HCtgSKxqb_BBHDR6oQMT4Dj74m0O&v1=0&v2=0&v3=0&v4=0&v5=0&v6=0&v7=0&v8=0',
+						success: function(response) {
+							$('#v1').text('OFF');
+							$('#v2').text('OFF');
+							$('#v3').text('OFF');
+							$('#v4').text('OFF');
+							$('#v5').text('OFF');
+							$('#v6').text('OFF');
+							$('#v7').text('OFF');
+							$('#v8').text('OFF');
+							$('#v9').text('OFF');
+						}
+					});
+				} else {
+					$.ajax({
+						url: 'https://sgp1.blynk.cloud/external/api/batch/update?token=OWA9HCtgSKxqb_BBHDR6oQMT4Dj74m0O&v1=1&v2=1&v3=1&v4=1&v5=1&v6=1&v7=1&v8=1',
+						success: function(response) {
+							$('#v1').text('ON');
+							$('#v2').text('ON');
+							$('#v3').text('ON');
+							$('#v4').text('ON');
+							$('#v5').text('ON');
+							$('#v6').text('ON');
+							$('#v7').text('ON');
+							$('#v8').text('ON');
+							$('#v9').text('ON');
+						}
+					});
+				}
+			});
+		</script>
+	</body>
+</html>
