@@ -4,6 +4,8 @@
 
 In this simple project using html, css, and ajax
 
+https://docs.blynk.io/en/blynk.cloud/https-api-overview
+
 <h2>Get Multiple Datastream values</h2>
 
 In some cases it's important to get the datastream values with one call. This endpoint allows you to get the stored values of the multiple Datastreams. 
