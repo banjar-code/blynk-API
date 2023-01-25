@@ -4,6 +4,12 @@
 
 In this simple project using html, css, and ajax
 
+replace the token in this project with your token.
+
+<b>I hope you don't try with my token code because it will hurt the performance of my ESP8266</b>
+
+however you can try using the following sample.
+
 https://docs.blynk.io/en/blynk.cloud/https-api-overview
 
 <h2>Get Multiple Datastream values</h2>
