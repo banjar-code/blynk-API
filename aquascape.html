@@ -104,6 +104,10 @@
 				<label for="v9">Semua Tombol</label>
 				<button class="data-item" id="v9">OFF</button>
 			</div>
+			<div class="data-kol">
+				<label for="v10">Pakan Ikan</label>
+				<button class="data-item" id="v10">OFF</button>
+			</div>
 		</div>
 		<script>
 			fetch('https://blynk.cloud/external/api/device/meta?token=OWA9HCtgSKxqb_BBHDR6oQMT4Dj74m0O&metaFieldId=1').then(response => response.json()).then(data => {
@@ -112,7 +116,7 @@
 			// fungsi untuk mengambil status awal
 			function getStatus() {
 				$.ajax({
-					url: 'https://sgp1.blynk.cloud/external/api/get?token=OWA9HCtgSKxqb_BBHDR6oQMT4Dj74m0O&v1&v2&v3&v4&v5&v6&v7&v8',
+					url: 'https://sgp1.blynk.cloud/external/api/get?token=OWA9HCtgSKxqb_BBHDR6oQMT4Dj74m0O&v1&v2&v3&v4&v5&v6&v7&v8&v9',
 					success: function(response) {
 						if (response.v1 == 1) {
 							$('#v1').text('ON');
@@ -150,6 +154,11 @@
 							$('#v7').text('OFF');
 						}
 						if (response.v8 == 1) {
+							$('#v8').text('ON');
+						} else {
+							$('#v8').text('OFF');
+						}
+						if (response.v9 == 1) {
 							$('#v8').text('ON');
 						} else {
 							$('#v8').text('OFF');
@@ -298,7 +307,7 @@
 			$('#v9').click(function() {
 				if ($(this).text() == 'ON') {
 					$.ajax({
-						url: 'https://sgp1.blynk.cloud/external/api/batch/update?token=OWA9HCtgSKxqb_BBHDR6oQMT4Dj74m0O&v1=0&v2=0&v3=0&v4=0&v5=0&v6=0&v7=0&v8=0',
+						url: 'https://sgp1.blynk.cloud/external/api/batch/update?token=OWA9HCtgSKxqb_BBHDR6oQMT4Dj74m0O&v1=0&v2=0&v3=0&v4=0&v5=0&v6=0&v7=0&v8=0&v9=0',
 						success: function(response) {
 							$('#v1').text('OFF');
 							$('#v2').text('OFF');
@@ -309,11 +318,12 @@
 							$('#v7').text('OFF');
 							$('#v8').text('OFF');
 							$('#v9').text('OFF');
+							$('#v10').text('OFF');
 						}
 					});
 				} else {
 					$.ajax({
-						url: 'https://sgp1.blynk.cloud/external/api/batch/update?token=OWA9HCtgSKxqb_BBHDR6oQMT4Dj74m0O&v1=1&v2=1&v3=1&v4=1&v5=1&v6=1&v7=1&v8=1',
+						url: 'https://sgp1.blynk.cloud/external/api/batch/update?token=OWA9HCtgSKxqb_BBHDR6oQMT4Dj74m0O&v1=1&v2=1&v3=1&v4=1&v5=1&v6=1&v7=1&v8=1&v9=1',
 						success: function(response) {
 							$('#v1').text('ON');
 							$('#v2').text('ON');
@@ -324,6 +334,7 @@
 							$('#v7').text('ON');
 							$('#v8').text('ON');
 							$('#v9').text('ON');
+							$('#v10').text('ON');
 						}
 					});
 				}
