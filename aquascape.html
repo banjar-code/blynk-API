@@ -101,11 +101,11 @@
 				<button class="data-item" id="v8">Loading...</button>
 			</div>
 			<div class="data-kol">
-				<label for="v9">Semua Tombol</label>
+				<label for="v9">Pakan Ikan</label>
 				<button class="data-item" id="v9">OFF</button>
 			</div>
 			<div class="data-kol">
-				<label for="v10">Pakan Ikan</label>
+				<label for="v10">Semua Tombol</label>
 				<button class="data-item" id="v10">OFF</button>
 			</div>
 		</div>
@@ -159,9 +159,9 @@
 							$('#v8').text('OFF');
 						}
 						if (response.v9 == 1) {
-							$('#v8').text('ON');
+							$('#v9').text('ON');
 						} else {
-							$('#v8').text('OFF');
+							$('#v9').text('OFF');
 						}
 					}
 				});
@@ -305,6 +305,23 @@
 				}
 			});
 			$('#v9').click(function() {
+				if ($(this).text() == 'ON') {
+					$.ajax({
+						url: 'https://sgp1.blynk.cloud/external/api/update?token=OWA9HCtgSKxqb_BBHDR6oQMT4Dj74m0O&v9=0',
+						success: function(response) {
+							$('#v9').text('OFF');
+						}
+					});
+				} else {
+					$.ajax({
+						url: 'https://sgp1.blynk.cloud/external/api/update?token=OWA9HCtgSKxqb_BBHDR6oQMT4Dj74m0O&v9=1',
+						success: function(response) {
+							$('#v9').text('ON');
+						}
+					});
+				}
+			});
+			$('#v10').click(function() {
 				if ($(this).text() == 'ON') {
 					$.ajax({
 						url: 'https://sgp1.blynk.cloud/external/api/batch/update?token=OWA9HCtgSKxqb_BBHDR6oQMT4Dj74m0O&v1=0&v2=0&v3=0&v4=0&v5=0&v6=0&v7=0&v8=0&v9=0',
