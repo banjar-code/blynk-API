@@ -5,6 +5,14 @@ on:
     - cron: '0 */2 * * *'  # Menjalankan setiap dua jam
 
 jobs:
+  set_timezone:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Set Zona Waktu ke WIB
+      run: |
+        sudo ln -sf /usr/share/zoneinfo/Asia/Jakarta /etc/localtime
+      shell: bash
+
   relay_control:
     runs-on: ubuntu-latest
 
