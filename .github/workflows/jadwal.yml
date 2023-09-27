@@ -1,0 +1,19 @@
+name: Relay Control
+
+on:
+  schedule:
+    - cron: '0 */2 * * *'  # Menjalankan setiap dua jam
+
+jobs:
+  relay_control:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout kode
+      uses: actions/checkout@v2
+
+    - name: Nyalakan Relay
+      run: |
+        curl -X POST "https://sgp1.blynk.cloud/external/api/update?token=hsoqoqt9FAJb7B_CkMv9qHe5ei94zPUp&v1=1"
+        sleep 20  # Tunggu 20 detik sebelum mematikan relay
+        curl -X POST "https://sgp1.blynk.cloud/external/api/update?token=hsoqoqt9FAJb7B_CkMv9qHe5ei94zPUp&v1=0"
